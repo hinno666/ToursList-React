@@ -1,13 +1,18 @@
-export const Tour = () => {
+import { useState } from "react"
+
+export const Tour = ({ id, name, image, info, price, deleteTour}) => {
+
+    const [showText, setShowText] = useState(false)
+
     return (
         <article className="single-tour">
-            <img src="" alt="" className="img"/>
-            <span className="tour-price">123 $</span>
+            <img src={image} alt={name} className="img" />
+            <span className="tour-price">{price} $</span>
             <div className="tour-info">
-                <h4>Name of tour</h4>
-                <p>some text..
-                    <button className="info-btn">read more</button>
-                    <button className='delete-btn btn-block btn'>Dont interesting</button>
+                <h4>{name}</h4>
+                <p>{showText ? info : `${info.substring(0, 200)}...` }
+                    <button className="info-btn" onClick={() => setShowText(!showText)}>read more</button>
+                    <button className='delete-btn btn-block btn' onClick={()=> deleteTour(id)}>Dont interesting</button>
                 </p>
             </div>
         </article>
